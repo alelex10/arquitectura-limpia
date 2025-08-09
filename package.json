@@ -1,12 +1,19 @@
 {
-  "name": "arquitectura-limpia",
+	"name": "arquitectura-limpia",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "pnpm --parallel run dev:backend dev:client",
+    "dev:backend": "pnpm --filter apps/backend run dev",
+    "dev:client": "pnpm --filter apps/client run dev"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "workspaces": [
+    "domain",
+    "apps/backend",
+    "apps/client"
+  ],
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "nodemon": "^3.1.10"
+  }
 }
