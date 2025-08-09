@@ -1,18 +1,17 @@
-export enum UserRole {
-  ADMIN = "ADMIN",
-  USER = "USER",
-}
+const UserRole = {
+	ADMIN :"ADMIN",
+	USER :"USER",
+} as const
 
-/**
- * Entidad User (dominio)
- * id: number (requerido)
- */
+type UserRole = (typeof UserRole)[keyof typeof UserRole];
+
+
 export interface User {
-  id: number;
-  username: string;
-  email: string;
-  passwordHash: string; // hashed password
-  role: UserRole;
-  createdAt?: Date;
-  updatedAt?: Date;
+	id: number;
+	username: string;
+	email: string;
+	password: string;
+	role: UserRole;
+	createdAt?: Date;
+	updatedAt?: Date;
 }
