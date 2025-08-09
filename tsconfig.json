@@ -18,12 +18,17 @@
   "references": [
     {
       "path": "./domain"
-    },
+    }/* ,
     {
       "path": "./apps/backend"
     },
     {
       "path": "./apps/frontend"
-    }
+    } */
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
   ]
 }
