@@ -58,16 +58,19 @@ describe("RegisterUser use-case", async () => {
 	});
 
 	test("With valid data, register a new user", async () => {
-		const payload: RegisterUserPayload = {
-			username: "ale",
-			email: "aa@a.com",
-			password: "123",
-		};
+    const payload: RegisterUserPayload = {
+        username: "ale",
+        email: "aa@a.com",
+        password: "123",
+    };
 
-		const result = await RegisterUser(deprendencies, payload);
-
-		const user = await userRepositoryMock.findByEmail(payload.email);
-		expect(user).not.toBeNull();
-		expect(result).toBeUndefined();
-	});
+    const result = await RegisterUser(deprendencies, payload);
+    
+    // Verificamos que el resultado sea undefined (sin errores)
+    expect(result).toBeUndefined();
+    
+    // Verificamos que el usuario fue creado
+    const user = await userRepositoryMock.findByEmail(payload.email);
+    expect(user).not.toBeNull();
+});
 });

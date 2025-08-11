@@ -8,7 +8,7 @@ export interface UserRepositoryMock extends IUserRepository {
 export function mockUserRepository(users: User[]): UserRepositoryMock {
   return {
     users: [],
-    async findByEmail(email: string): Promise<User | null> {
+    findByEmail: async (email: string): Promise<User | null> => {
       const user = users.find((user) => user.email === email);
       const result = user ? { ...user } : null;
       return result;
