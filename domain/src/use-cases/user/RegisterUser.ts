@@ -1,5 +1,5 @@
 import { User } from "../../entities";
-import { createInvalidDataError, InvalidDataError } from "../../errors/error";
+import { createInvalidDataError, InvalidDataError } from "../../errors/Errors";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
 export type RegisterUserPayload = Pick<User, "username" | "email" | "password">;
@@ -23,7 +23,7 @@ export async function RegisterUser(
 	}
 
 	const user: User = {
-		id: crypto.randomUUID(),/* para generar ids unicos */
+		id: crypto.randomUUID() /* para generar ids unicos */,
 		username,
 		email,
 		password,

@@ -1,6 +1,6 @@
 import { describe, test, expect, vi } from "vitest";
 import { RegisterUser, RegisterUserDependencies, RegisterUserPayload } from "../RegisterUser";
-import { createInvalidDataError } from "../../../errors/error";
+import { createInvalidDataError } from "../../../errors/Errors";
 import { mockUserRepository, UserRepositoryMock } from "src/mocks/UserRepositoryMock";
 
 describe("RegisterUser use-case", async () => {
