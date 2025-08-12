@@ -7,9 +7,16 @@ import { User } from "../../../entities/User";
 describe("LoginUser use-case", () => {
 	let userRepositoryMock: UserRepositoryMock;
 	let dependencies: LoginUserDependencies;
+	const user: User = {
+		id: "1",
+		username: "ale",
+		email: "a@a.com",
+		password: "correct",
+		role: "USER",
+	};
 
 	beforeEach(() => {
-		userRepositoryMock = mockUserRepository([]);
+		userRepositoryMock = mockUserRepository([user]);
 		dependencies = { userRepository: userRepositoryMock };
 	});
 
@@ -20,7 +27,7 @@ describe("LoginUser use-case", () => {
 	});
 
 	test("With empty password, fail with 'Password is required'", async () => {
-		const payload: LoginUserPayload = { email: "a@a.com", password: "" };
+		const payload: LoginUserPayload = { email: "aa@a.com", password: "" };
 		const result = await LoginUser(dependencies, payload);
 		expect(result).toEqual(createInvalidDataError("Password is required"));
 	});
@@ -32,14 +39,6 @@ describe("LoginUser use-case", () => {
 	});
 
 	test("With wrong password, fail with 'Password is incorrect'", async () => {
-		const user: User = {
-			id: "1",
-			username: "ale",
-			email: "a@a.com",
-			password: "correct",
-			role: "USER",
-		};
-		userRepositoryMock.users.push(user);
 		const payload: LoginUserPayload = { email: "a@a.com", password: "wrong" };
 		console.log(dependencies);
 		const result = await LoginUser(dependencies, payload);
@@ -48,18 +47,10 @@ describe("LoginUser use-case", () => {
 	});
 
 	test("With valid credentials, return the user", async () => {
-		const user: User = {
-			id: "1",
-			username: "ale",
-			email: "a@a.com",
-			password: "123",
-			role: "USER",
-		};
-		userRepositoryMock.users.push(user);
-
-		const payload: LoginUserPayload = { email: "a@a.com", password: "123" };
+		const payload: LoginUserPayload = { email: "a@a.com", password: "correct" };
 		const result = await LoginUser(dependencies, payload);
 		expect(result).toEqual(user);
 	});
 });
+
 
