@@ -1,7 +1,7 @@
 import { IDocumentRepository } from "../repositories/IDocumentRepository";
 import { IVersionRepository } from "../repositories/IVersionRepository";
-import { createInvalidDataError, InvalidDataError } from "../errors/Errors";
-import { Document } from "../entities/Document";
+import { createInvalidDataError, InvalidDataError } from "../../errors/Errors";
+import { Document } from "../../entities/Document";
 
 export type UpdateDocumentDTO = {
   documentId: string;

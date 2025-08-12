@@ -1,5 +1,5 @@
 import { IDocumentRepository } from "../repositories/IDocumentRepository";
-import { createInvalidDataError, InvalidDataError } from "../errors/Errors";
+import { createInvalidDataError, InvalidDataError } from "../../errors/Errors";
 
 export interface DeleteDocumentDeps {
   documents: IDocumentRepository;
