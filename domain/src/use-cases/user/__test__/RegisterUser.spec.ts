@@ -1,22 +1,24 @@
-import { describe, test, expect, vi } from "vitest";
+import { describe, test, expect, vi, beforeEach } from "vitest";
 import { RegisterUser, RegisterUserDependencies, RegisterUserPayload } from "../RegisterUser";
 import { createInvalidDataError } from "../../../errors/Errors";
 import { mockUserRepository, UserRepositoryMock } from "src/mocks/UserRepositoryMock";
 
 describe("RegisterUser use-case", async () => {
-	const userRepositoryMock: UserRepositoryMock = mockUserRepository([]);
-	const deprendencies: RegisterUserDependencies = {
-		userRepository: userRepositoryMock,
-	};
+	let userRepositoryMock: UserRepositoryMock ;
+	let dependencies: RegisterUserDependencies ;
 
+	beforeEach(() => {
+		userRepositoryMock = mockUserRepository([]);
+		dependencies = { userRepository: userRepositoryMock };
+	});
 	test("With an email already in use, fail with 'Email already in use'", async () => {
 		const payload: RegisterUserPayload = {
 			username: "ale",
 			email: "a@a.com",
 			password: "123",
 		};
-		await RegisterUser(deprendencies, payload);
-		const result = await RegisterUser(deprendencies, payload);
+		await RegisterUser(dependencies, payload);
+		const result = await RegisterUser(dependencies, payload);
 
 		expect(result).toEqual(createInvalidDataError("Email already in use"));
 	});
@@ -28,7 +30,7 @@ describe("RegisterUser use-case", async () => {
 			password: "123",
 		};
 
-		const result = await RegisterUser(deprendencies, payload);
+		const result = await RegisterUser(dependencies, payload);
 
 		expect(result).toEqual(createInvalidDataError("Email is required"));
 	});
@@ -40,7 +42,7 @@ describe("RegisterUser use-case", async () => {
 			password: "123",
 		};
 
-		const result = await RegisterUser(deprendencies, payload);
+		const result = await RegisterUser(dependencies, payload);
 
 		expect(result).toEqual(createInvalidDataError("Username is required"));
 	});
@@ -52,7 +54,7 @@ describe("RegisterUser use-case", async () => {
 			password: "",
 		};
 
-		const result = await RegisterUser(deprendencies, payload);
+		const result = await RegisterUser(dependencies, payload);
 
 		expect(result).toEqual(createInvalidDataError("Password is required"));
 	});
@@ -64,11 +66,11 @@ describe("RegisterUser use-case", async () => {
         password: "123",
     };
 
-    const result = await RegisterUser(deprendencies, payload);
+    const result = await RegisterUser(dependencies, payload);
     
     // Verificamos que el resultado sea undefined (sin errores)
     expect(result).toBeUndefined();
-    
+    console.log("dependencies",dependencies)
     // Verificamos que el usuario fue creado
     const user = await userRepositoryMock.findByEmail(payload.email);
     expect(user).not.toBeNull();

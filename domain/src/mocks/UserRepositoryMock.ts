@@ -10,6 +10,7 @@ export function mockUserRepository(users: User[]): UserRepositoryMock {
     users: [],
     findByEmail: async (email: string): Promise<User | null> => {
       const user = users.find((user) => user.email === email);
+      console.log("se encontro el usuario con el email", user)
       const result = user ? { ...user } : null;
       return result;
     },
