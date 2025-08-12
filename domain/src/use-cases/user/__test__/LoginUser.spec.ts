@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach } from "vitest";
 import { LoginUser, LoginUserDependencies, LoginUserPayload } from "../LoginUser";
 import { createInvalidDataError } from "../../../errors/Errors";
-import { mockUserRepository, UserRepositoryMock } from "src/mocks/UserRepositoryMock";
+import { mockUserRepository, UserRepositoryMock } from "src/mocks/user-repository-mock";
 import { User } from "../../../entities/User";
 
 describe("LoginUser use-case", () => {
@@ -52,5 +52,4 @@ describe("LoginUser use-case", () => {
 		expect(result).toEqual(user);
 	});
 });
-
 

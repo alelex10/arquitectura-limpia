@@ -1,11 +1,11 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { RegisterUser, RegisterUserDependencies, RegisterUserPayload } from "../RegisterUser";
 import { createInvalidDataError } from "../../../errors/Errors";
-import { mockUserRepository, UserRepositoryMock } from "src/mocks/UserRepositoryMock";
+import { mockUserRepository, UserRepositoryMock } from "src/mocks/user-repository-mock";
 
 describe("RegisterUser use-case", async () => {
-	let userRepositoryMock: UserRepositoryMock ;
-	let dependencies: RegisterUserDependencies ;
+	let userRepositoryMock: UserRepositoryMock;
+	let dependencies: RegisterUserDependencies;
 
 	beforeEach(() => {
 		userRepositoryMock = mockUserRepository([]);
@@ -60,19 +60,19 @@ describe("RegisterUser use-case", async () => {
 	});
 
 	test("With valid data, register a new user", async () => {
-    const payload: RegisterUserPayload = {
-        username: "ale",
-        email: "aa@a.com",
-        password: "123",
-    };
+		const payload: RegisterUserPayload = {
+			username: "ale",
+			email: "aa@a.com",
+			password: "123",
+		};
 
-    const result = await RegisterUser(dependencies, payload);
-    
-    // Verificamos que el resultado sea undefined (sin errores)
-    expect(result).toBeUndefined();
-    console.log("dependencies",dependencies)
-    // Verificamos que el usuario fue creado
-    const user = await userRepositoryMock.findByEmail(payload.email);
-    expect(user).not.toBeNull();
-});
+		const result = await RegisterUser(dependencies, payload);
+
+		// Verificamos que el resultado sea undefined (sin errores)
+		expect(result).toBeUndefined();
+		console.log("dependencies", dependencies);
+		// Verificamos que el usuario fue creado
+		const user = await userRepositoryMock.findByEmail(payload.email);
+		expect(user).not.toBeNull();
+	});
 });
