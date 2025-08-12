@@ -10,7 +10,7 @@ export enum CollaboratorPermission {
  */
 export interface DocumentCollaborator {
   documentId: number;
-  userId: number;
+  userId: string;
   permission: CollaboratorPermission;
   addedAt?: Date;
 }

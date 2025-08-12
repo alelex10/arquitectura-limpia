@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { UpdateDocument } from "../UpdateDocument";
-import { mockDocumentRepository, mockVersionRepository } from "../../mocks/document-repository-mock";
-import { createInvalidDataError } from "../../errors/error";
+import { mockDocumentRepository } from "../../../mocks/document-repository-mock";
+import { createInvalidDataError } from "../../../errors/Errors";
+import { mockVersionRepository } from "../../../mocks/version-repository-mock";
 
 describe("UpdateDocument use-case", () => {
 	it("fails if document not found", async () => {

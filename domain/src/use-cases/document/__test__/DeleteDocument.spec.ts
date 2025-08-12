@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { DeleteDocument } from "../DeleteDocument";
-import { mockDocumentRepository } from "../../mocks/document-repository-mock";
-import { createInvalidDataError } from "../../errors/error";
+import { createInvalidDataError } from "../../../errors/Errors";
+import { mockDocumentRepository } from "../../../mocks/document-repository-mock";
 
 describe("DeleteDocument use-case", () => {
 	it("fails if not owner", async () => {
@@ -38,3 +38,4 @@ describe("DeleteDocument use-case", () => {
 		expect(found).toBeNull();
 	});
 });
+

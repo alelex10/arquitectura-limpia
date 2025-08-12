@@ -1,17 +1,18 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, test } from "vitest";
 import { CreateDocument } from "../CreateDocument";
-import { mockDocumentRepository, mockVersionRepository } from "../../mocks/document-repository-mock";
-import { createInvalidDataError } from "../../errors/error";
+import { mockDocumentRepository } from "../../../mocks/document-repository-mock";
+import { mockVersionRepository } from "../../../mocks/version-repository-mock";
+import { createInvalidDataError } from "src/errors/Errors";
 
 describe("CreateDocument use-case", () => {
-	it("fails if title is empty", async () => {
+	test("fails if title is empty", async () => {
 		const docs = mockDocumentRepository([]);
 		const versions = mockVersionRepository([]);
 		const res = await CreateDocument({ documents: docs, versions }, { title: "", ownerId: "u1" });
 		expect(res).toEqual(createInvalidDataError("Title is required"));
 	});
 
-	it("creates document and initial version", async () => {
+	test("creates document and initial version", async () => {
 		const docs = mockDocumentRepository([]);
 		const versions = mockVersionRepository([]);
 		const res = await CreateDocument({ documents: docs, versions }, { title: "Doc", content: "c", ownerId: "u1" });
@@ -22,3 +23,4 @@ describe("CreateDocument use-case", () => {
 		expect(v[0].version).toBe(1);
 	});
 });
+

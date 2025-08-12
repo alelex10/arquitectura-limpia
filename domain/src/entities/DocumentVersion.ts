@@ -2,10 +2,10 @@
  * Version de un documento
  */
 export interface DocumentVersion {
-  id: number;
-  documentId: number;
+  id: string;
+  documentId: string;
   content: string;       // contenido Markdown
   version: number;       // número de versión incremental
-  createdBy: number;     // user id
+  createdBy: string;     // user id
   createdAt?: Date;
 }
