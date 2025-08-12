@@ -1,6 +1,6 @@
 import { IDocumentRepository } from "../repositories/IDocumentRepository";
 import { IVersionRepository } from "../repositories/IVersionRepository";
-import { createInvalidDataError, InvalidDataError } from "../errors/error";
+import { createInvalidDataError, InvalidDataError } from "../errors/Errors";
 import { Document } from "../entities/Document";
 
 export type CreateDocumentDTO = { title: string; content?: string; ownerId: string; };
