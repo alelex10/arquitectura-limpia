@@ -10,7 +10,7 @@
   "workspaces": [
     "domain",
     "apps/backend",
-    "apps/client"
+    "apps/frontend"
   ],
   "devDependencies": {
     "typescript": "^5.8.3",
