@@ -17,7 +17,7 @@
   },
   "references": [
     {
-      "path": "./domain"
+      "@domain": "./domain/src"
     },
     {
       "path": "./apps/backend"
