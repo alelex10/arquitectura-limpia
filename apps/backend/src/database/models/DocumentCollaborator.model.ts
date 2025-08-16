@@ -9,8 +9,8 @@ import {
   BelongsTo,
   Index
 } from "sequelize-typescript";
-import { User } from "./User";
-import { Document } from "./Document";
+import { DocumentModel } from "./Document.model";
+import { UserModel } from "./User.model";
 
 export enum CollaboratorPermission {
   OWNER = "OWNER",
@@ -22,18 +22,21 @@ export enum CollaboratorPermission {
   tableName: "document_collaborators",
   timestamps: true,
 })
-export class DocumentCollaborator extends Model<DocumentCollaborator> {
-  @PrimaryKey
+export class DocumentCollaboratorModel extends Model<DocumentCollaboratorModel> {
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUID })
+  @Column({
+    type: DataType.UUID,
+    primaryKey: true,
+  })
   id!: string;
 
-  @ForeignKey(() => Document)
+
+  @ForeignKey(() => DocumentModel)
   @Index("idx_document_collab_document")
   @Column({ type: DataType.UUID, allowNull: false })
   documentId!: string;
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => UserModel)
   @Index("idx_document_collab_user")
   @Column({ type: DataType.UUID, allowNull: false })
   userId!: string;
@@ -41,9 +44,9 @@ export class DocumentCollaborator extends Model<DocumentCollaborator> {
   @Column({ type: DataType.ENUM(...Object.values(CollaboratorPermission)), allowNull: false })
   permission!: CollaboratorPermission;
 
-  @BelongsTo(() => Document, "documentId")
-  document?: Document;
+  @BelongsTo(() => DocumentModel, "documentId")
+  document?: DocumentModel;
 
-  @BelongsTo(() => User, "userId")
-  user?: User;
+  @BelongsTo(() => UserModel, "userId")
+  user?: UserModel;
 }

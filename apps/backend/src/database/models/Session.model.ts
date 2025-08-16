@@ -3,29 +3,35 @@ import {
   Model,
   Column,
   DataType,
-  PrimaryKey,
   Default,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
 } from "sequelize-typescript";
-import { User } from "./User";
+import { UserModel } from "./User.model";
+import { Session } from "src/entities";
+import { Optional } from "sequelize";
+
+type SessionCreationAttributes = Optional<Session, "id">;
 
 @Table({
   tableName: "sessions",
   timestamps: true,
 })
-export class Session extends Model<Session> {
-  @PrimaryKey
+export class SessionModel extends Model<Session, SessionCreationAttributes> {
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUID })
+  @Column({
+    type: DataType.UUID,
+    primaryKey: true,
+  })
   id!: string;
 
-  @ForeignKey(() => User)
-  @Column({ type: DataType.UUID, allowNull: false })
+  @ForeignKey(() => UserModel)
+  
   userId!: string;
 
-  @BelongsTo(() => User, "userId")
-  user?: User;
+  @BelongsTo(() => UserModel)
+  
+  user?: UserModel;
 
   @Column({ type: DataType.STRING, allowNull: false, unique: true })
   token!: string;

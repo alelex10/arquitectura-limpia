@@ -4,6 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 import path from "path";
 import { Sequelize } from "sequelize-typescript";
+import { UserModel } from "./models/User.model";
+import { DocumentVersionModel } from "./models/DocumentVersion.model";
+import { SessionModel } from "./models/Session.model";
+import { DocumentModel } from "./models/Document.model";
 
 console.log("process.env", process.env.DB_PASS);
 const {
@@ -21,7 +25,7 @@ export const sequelize = new Sequelize({
   username: DB_USER,
   password: DB_PASS,
   database: DB_NAME,
-  models: [path.resolve(__dirname, "..", "models")], // buscará modelos en src/models
+  models: [UserModel, DocumentVersionModel, SessionModel, DocumentModel], // buscará modelos en src/models
   logging: false
 });
 
