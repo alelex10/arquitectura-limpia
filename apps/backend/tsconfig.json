@@ -18,7 +18,28 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "paths": {
+      "@domain/*": [
+        "../../domain/src/*"
+      ],
+      "@backend/*": [
+        "../../apps/backend/*"
+      ]
+    },
+
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*",
+    "src/**/*.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ],
+  "references": [
+    {
+      "path": "../../domain"
+    }
+  ]
 }

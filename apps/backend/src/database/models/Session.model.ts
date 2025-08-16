@@ -8,7 +8,7 @@ import {
   BelongsTo,
 } from "sequelize-typescript";
 import { UserModel } from "./User.model";
-import { Session } from "src/entities";
+import { Session } from "@domain/entities";
 import { Optional } from "sequelize";
 
 type SessionCreationAttributes = Optional<Session, "id">;

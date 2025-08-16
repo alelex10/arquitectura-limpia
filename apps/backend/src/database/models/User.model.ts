@@ -7,12 +7,10 @@ import {
   HasMany,
   Model,
   Table,
-  Unique,
   UpdatedAt,
 } from "sequelize-typescript";
-import { User, UserRole } from "src/entities";
+import { User, UserRole } from "@domain/entities";
 import { SessionModel } from "./Session.model";
-import { DocumentVersionModel } from "./DocumentVersion.model";
 import { DocumentModel } from "./Document.model";
 
 type UserCreationAttributes = Optional<User, "id">;
