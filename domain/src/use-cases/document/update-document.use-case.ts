@@ -1,4 +1,4 @@
-import { createInvalidDataError, InvalidDataError } from "../../errors/Errors";
+import { createInvalidDataError, InvalidDataError } from "../../errors/errors";
 import { Document } from "../../entities/document.entity";
 import { IDocumentRepository } from "../../repositories/IDocumentRepository";
 import { IVersionRepository } from "../../repositories/IVersionRepository";
@@ -26,14 +26,14 @@ export async function UpdateDocument(
 	if (!doc) return createInvalidDataError("Document not found");
 
 	// permiso: owner o editor
-	/* const isOwner = doc.ownerId === dto.userId;
+	const isOwner = doc.ownerId === dto.userId;
 	const hasEditor = (doc.collaborators ?? []).some(
 		(c) => c.userId == dto.userId && (c.permission === "EDITOR" || c.permission === "OWNER")
 	);
 
 	if (!isOwner && !hasEditor) {
 		return createInvalidDataError("Not authorized to update document");
-	} */
+	}
 
 	const updated: Document = {
 		...doc,

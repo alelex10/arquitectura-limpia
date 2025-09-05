@@ -1,9 +1,9 @@
-const UserRole = {
+const Role = {
 	ADMIN :"ADMIN",
 	USER :"USER",
 } as const
 
-export type UserRole = (typeof UserRole)[keyof typeof UserRole];
+export type Role = (typeof Role)[keyof typeof Role];
 
 
 export interface User {
@@ -11,7 +11,7 @@ export interface User {
 	username: string;
 	email: string;
 	password: string;
-	role: UserRole;
+	role: Role;
 	createdAt?: Date;
 	updatedAt?: Date;
 }

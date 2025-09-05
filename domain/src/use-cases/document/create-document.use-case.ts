@@ -1,4 +1,4 @@
-import { createInvalidDataError, InvalidDataError } from "../../errors/Errors";
+import { createInvalidDataError, InvalidDataError } from "../../errors/errors";
 import { Document } from "../../entities/document.entity";
 import { IDocumentRepository } from "../../repositories/IDocumentRepository";
 import { IVersionRepository } from "../../repositories/IVersionRepository";

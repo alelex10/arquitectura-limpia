@@ -1,4 +1,4 @@
-import { createInvalidDataError, InvalidDataError } from "../../errors/Errors";
+import { createInvalidDataError, InvalidDataError } from "../../errors/errors";
 import { IDocumentRepository } from "../../repositories/IDocumentRepository";
 
 export interface DeleteDocumentDeps {

@@ -32,6 +32,7 @@ export function mockDocumentRepository(docs: Document[] = []): DocumentRepositor
 			const index = docs.findIndex((x) => x.id === id);
 			if (index === -1) return null;
 			docs.splice(index, 1);
+			return true;
 		},
 		findById: async (id) => {
 			const doc = docs.find((x) => x.id === id);
