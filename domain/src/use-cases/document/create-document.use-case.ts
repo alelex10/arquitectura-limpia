@@ -1,5 +1,5 @@
 import { createInvalidDataError, InvalidDataError } from "../../errors/Errors";
-import { Document } from "../../entities/Document";
+import { Document } from "../../entities/document.entity";
 import { IDocumentRepository } from "../../repositories/IDocumentRepository";
 import { IVersionRepository } from "../../repositories/IVersionRepository";
 

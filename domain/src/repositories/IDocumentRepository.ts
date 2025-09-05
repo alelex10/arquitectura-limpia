@@ -1,4 +1,4 @@
-import { Document } from "../entities/Document";
+import { Document } from "../entities/document.entity";
 
 export interface IDocumentRepository {
 	findById(id: string): Promise<Document | null>;

@@ -1,5 +1,5 @@
 import { User } from "../../entities";
-import { createInvalidDataError, InvalidDataError } from "../../errors/Errors";
+import { createInvalidDataError, InvalidDataError } from "../../errors/errors";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
 export type LoginUserPayload = Pick<User, "email" | "password">;

@@ -1,4 +1,4 @@
-import { Document } from "../entities/Document";
+import { Document } from "../entities/document.entity";
 import { IDocumentRepository } from "../repositories/IDocumentRepository";
 
 /** Mock del repo de documentos */

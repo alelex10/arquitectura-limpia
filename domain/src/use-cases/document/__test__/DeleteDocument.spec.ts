@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { DeleteDocument } from "../DeleteDocument";
-import { createInvalidDataError } from "../../../errors/Errors";
+import { DeleteDocument } from "../delete-document.use-case";
+import { createInvalidDataError } from "../../../errors/errors";
 import { mockDocumentRepository } from "../../../mocks/document-repository-mock";
 
 describe("DeleteDocument use-case", () => {

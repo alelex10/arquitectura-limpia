@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { UpdateDocument } from "../UpdateDocument";
+import { UpdateDocument } from "../update-document.use-case";
 import { mockDocumentRepository } from "../../../mocks/document-repository-mock";
-import { createInvalidDataError } from "../../../errors/Errors";
+import { createInvalidDataError } from "../../../errors/errors";
 import { mockVersionRepository } from "../../../mocks/version-repository-mock";
 
 describe("UpdateDocument use-case", () => {

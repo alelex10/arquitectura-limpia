@@ -1,5 +1,4 @@
-import { DocumentCollaborator } from "./DocumentCollaborator";
-import { DocumentVersion } from "./DocumentVersion";
+import { DocumentVersion } from "./document-version.entity";
 
 /**
  * Entidad Document (apunte / nota)
@@ -9,7 +8,7 @@ export interface Document {
   title: string;
   content?: string;                      // Markdown (puede ser null inicialmente)
   ownerId: string;                       // user id (propietario)
-  collaborators?: DocumentCollaborator[]; // lista de colaboradores y sus permisos
+  // collaborators?: DocumentCollaborator[]; // lista de colaboradores y sus permisos
   versions?: DocumentVersion[];          // historial de versiones (opcional en el dominio)
   createdAt?: Date;
   updatedAt?: Date;

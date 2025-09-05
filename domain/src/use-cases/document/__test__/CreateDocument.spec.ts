@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, test } from "vitest";
-import { CreateDocument } from "../CreateDocument";
+import { CreateDocument } from "../create-document.use-case";
 import { mockDocumentRepository } from "../../../mocks/document-repository-mock";
 import { mockVersionRepository } from "../../../mocks/version-repository-mock";
-import { createInvalidDataError } from "src/errors/Errors";
+import { createInvalidDataError } from "src/errors/errors";
 
 describe("CreateDocument use-case", () => {
 	test("fails if title is empty", async () => {

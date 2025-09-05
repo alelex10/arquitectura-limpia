@@ -1,8 +1,8 @@
 import { describe, test, expect, beforeEach } from "vitest";
 import { LoginUser, LoginUserDependencies, LoginUserPayload } from "../LoginUser";
-import { createInvalidDataError } from "../../../errors/Errors";
+import { createInvalidDataError } from "../../../errors/errors";
 import { mockUserRepository, UserRepositoryMock } from "src/mocks/user-repository-mock";
-import { User } from "../../../entities/User";
+import { User } from "../../../entities/user.entity";
 
 describe("LoginUser use-case", () => {
 	let userRepositoryMock: UserRepositoryMock;
