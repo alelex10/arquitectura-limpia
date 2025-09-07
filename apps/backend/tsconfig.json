@@ -4,6 +4,7 @@
     "module": "commonjs",
     "composite": true,
     "declaration": true,
+    "baseUrl": "./",
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -11,7 +12,6 @@
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
     "rootDir": "./src", // Especifica la raíz de entrada para los archivos
     "incremental": true,
     "skipLibCheck": true,

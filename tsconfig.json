@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    // "baseUrl": "./",
     "incremental": true, /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
     "composite": true,
     // "rootDir": "",
