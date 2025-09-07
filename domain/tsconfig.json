@@ -9,13 +9,7 @@
     "baseUrl": "./", // se elimina para usar paths desde el tsconfig raíz
     "declaration": true,
     "declarationMap": true,
-    "noEmit": false,
-    "outDir": "./dist",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
+    "outDir": "./dist"
   },
   "include": [
     "src/**/*.ts"
