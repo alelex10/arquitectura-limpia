@@ -1,4 +1,4 @@
-import { User } from "../../entities";
+import { User } from "../../entities/user.entity";
 import { createInvalidDataError, InvalidDataError } from "../../errors/errors";
 import { IUserRepository } from "../../repositories/IUserRepository";
 

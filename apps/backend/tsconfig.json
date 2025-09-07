@@ -10,7 +10,8 @@
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    // "baseUrl": "./", // Se elimina para usar paths desde el tsconfig raíz
+    "rootDir": "./src", // Especifica la raíz de entrada para los archivos
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
@@ -18,9 +19,22 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "composite": true
+    // "composite": true,
+/*     "paths": {
+      "@domain/*": ["../../domain/src/*"]
+    } */
   },
     "include": [
-    "src/**/*.ts"                   // Incluye todos los archivos .ts dentro de la carpeta src
+    "src/**/*.ts"// Incluye todos los archivos .ts dentro de la carpeta src
   ],
+    "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts" // Excluye tests localmente
+  ],
+  "references": [
+    {
+      "path": "../../domain"
+    }
+  ]
 }

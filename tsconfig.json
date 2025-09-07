@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "incremental": true, /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
-    "composite": true, /* Enable constraints that allow a TypeScript project to be used with project references. */
+    "composite": true,
     "target": "es2016", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "module": "commonjs", /* Specify what module code is generated. */
     "moduleResolution": "node", /* Specify how TypeScript looks up a file from a given module specifier. */
@@ -14,8 +15,10 @@
     "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
     "strict": true, /* Enable all strict type-checking options. */
     "skipLibCheck": true, /* Skip type checking all .d.ts files. */
-    "paths": {
-      "@domain/*": ["../../domain/src/*"]
+ "paths": {
+      "@domain/*": ["./domain/src/*"],
+      "@backend/*": ["./apps/backend/src/*"], // También ajustamos esto para que apunte a src
+      "@frontend/*": ["./apps/frontend/src/*"] // Y esto
     }
   },
   "references": [
@@ -24,14 +27,13 @@
     },
     {
       "path": "./apps/backend"
-    }/* ,
-    {
-      "path": "./apps/frontend"
-    } */
+    }
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "**/*.test.ts"
+    "**/*.test.ts",
+    "apps/*/dist", // Añadido para excluir carpetas dist de apps
+    "domain/dist"   // Añadido para excluir carpeta dist de domain
   ]
 }

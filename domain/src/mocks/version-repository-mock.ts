@@ -1,4 +1,4 @@
-import { DocumentVersion } from "../entities";
+import { DocumentVersion } from "../entities/document-version.entity";
 import { IVersionRepository } from "../repositories/IVersionRepository";
 
 export type VersionRepositoryMock = IVersionRepository & {
