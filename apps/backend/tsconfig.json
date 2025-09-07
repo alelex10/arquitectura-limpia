@@ -3,6 +3,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
+    "baseUrl": "./",
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -10,17 +11,27 @@
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    // "rootDir": "./src",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@domain/*": [
+        "../../domain/src/*"
+      ],
+      "@backend/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
-    "src/**/*.ts"
+    "generated/**/*.ts",
+    "src/**/*.ts",
+    "src/main.ts"
   ],
   "exclude": [
     "node_modules",
