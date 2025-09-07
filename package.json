@@ -1,14 +1,21 @@
 {
-	"name": "arquitectura-limpia",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "pnpm --parallel run dev:backend dev:client",
-    "dev:backend": "pnpm --filter ./apps/backend run start:dev",
-    "dev:client": "pnpm --filter ./apps/frontend run dev"
-  },
-  "devDependencies": {
-    "typescript": "^5.8.3",
-    "nodemon": "^3.1.10"
-  }
+	"name": "for-it-proyecto-",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+		"dev:frontend": "npm --workspace apps/client run dev",
+		"dev:backend": "npm --workspace apps/server run dev"
+	},
+	"private": true,
+	"workspaces": [
+		"domain",
+		"apps/server",
+		"apps/client"
+	],
+	"devDependencies": {
+		"concurrently": "^9.2.0",
+		"nodemon": "^3.1.10",
+		"typescript": "^5.8.3"
+	}
 }
