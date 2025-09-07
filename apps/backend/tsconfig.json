@@ -19,8 +19,21 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@domain/*": ["../../domain/src/*"]
-    }
+      "@domain/*": [
+        "../../domain/dist/*" // <-- Cambiado de ../../domain/src/*
+      ]
+    },
+    "composite": true, /* Enable constraints that allow a TypeScript project to be used with project references. */
+    "moduleResolution": "node", /* Specify how TypeScript looks up a file from a given module specifier. */
+    "baseUrl": "./", /* Specify the base directory to resolve non-relative module names. */
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ], /* Specify multiple folders that act like './node_modules/@types'. */
+    "resolveJsonModule": true, /* Enable importing .json files. */
+    "noEmit": false, /* Disable emitting files from a compilation. */
+    "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "strict": true, /* Enable all strict type-checking options. */
   },
   "include": [
     "src/**/*.ts"

@@ -4,14 +4,13 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-		"dev:frontend": "npm --workspace apps/client run dev",
-		"dev:backend": "npm --workspace apps/server run dev"
+		"dev:frontend": "pnpm --workspace apps/frontend run dev",
+		"dev:backend": "pnpm --filter ./apps/backend run build && pnpm --filter ./apps/backend run start:dev"
 	},
 	"private": true,
 	"workspaces": [
 		"domain",
-		"apps/server",
-		"apps/client"
+		"apps/backend"
 	],
 	"devDependencies": {
 		"concurrently": "^9.2.0",

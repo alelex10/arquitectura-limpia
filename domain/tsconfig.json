@@ -4,7 +4,8 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": "./", // Necesario para que paths funcione internamente
   },
   "include": [
     "src/**/*.ts"
