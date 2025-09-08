@@ -16,17 +16,6 @@
     "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
     "strict": true, /* Enable all strict type-checking options. */
     "skipLibCheck": true, /* Skip type checking all .d.ts files. */
-    "paths": {
-      "@domain/*": [
-        "domain/src/*"
-      ],
-      "@backend/*": [
-        "apps/backend/src/*"
-      ], // También ajustamos esto para que apunte a src
-      "@frontend/*": [
-        "apps/frontend/src/*"
-      ] // Y esto
-    }
   },
   "references": [
     {
