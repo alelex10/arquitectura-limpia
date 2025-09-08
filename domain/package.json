@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		
+		"build": "tsc --build",
 		"test": "vitest",
 		"test:watch": "vitest --watch"
 	},
