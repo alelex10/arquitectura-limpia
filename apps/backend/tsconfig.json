@@ -11,7 +11,7 @@
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "./src", // Especifica la raíz de entrada para los archivos
+    // "rootDir": "./src", // Especifica la raíz de entrada para los archivos
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
@@ -19,11 +19,11 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {
+/*     "paths": {
       "@domain/*": [
         "../../domain/src/*"
       ]
-    }
+    } */
   },
   "include": [
     "src/**/*.ts" // Incluye todos los archivos .ts dentro de la carpeta src
