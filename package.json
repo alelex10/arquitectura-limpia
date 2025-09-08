@@ -1,14 +1,15 @@
 {
 	"name": "arquitectura-limpia",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "pnpm --parallel run dev:backend dev:client",
-    "dev:backend": "pnpm --filter ./apps/backend run start:dev",
-    "dev:client": "pnpm --filter ./apps/frontend run dev"
-  },
-  "devDependencies": {
-    "typescript": "^5.8.3",
-    "nodemon": "^3.1.10"
-  }
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"build": "tsc --build",
+		"dev": "pnpm --parallel run dev:backend dev:client",
+		"dev:backend": "pnpm --filter ./apps/backend run start:dev",
+		"dev:client": "pnpm --filter ./apps/frontend run dev"
+	},
+	"devDependencies": {
+		"typescript": "^5.8.3",
+		"nodemon": "^3.1.10"
+	}
 }

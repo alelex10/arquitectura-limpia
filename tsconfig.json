@@ -15,18 +15,24 @@
     "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
     "strict": true, /* Enable all strict type-checking options. */
     "skipLibCheck": true, /* Skip type checking all .d.ts files. */
- "paths": {
-      "@domain/*": ["./domain/src/*"],
-      "@backend/*": ["./apps/backend/src/*"], // También ajustamos esto para que apunte a src
-      "@frontend/*": ["./apps/frontend/src/*"] // Y esto
+    "paths": {
+      "@domain/*": [
+        "domain/src/*"
+      ],
+      "@backend/*": [
+        "apps/backend/src/*"
+      ], // También ajustamos esto para que apunte a src
+      "@frontend/*": [
+        "apps/frontend/src/*"
+      ] // Y esto
     }
   },
   "references": [
     {
-      "path": "./domain"
+      "path": "domain"
     },
     {
-      "path": "./apps/backend"
+      "path": "apps/backend"
     }
   ],
   "exclude": [
@@ -34,6 +40,6 @@
     "dist",
     "**/*.test.ts",
     "apps/*/dist", // Añadido para excluir carpetas dist de apps
-    "domain/dist"   // Añadido para excluir carpeta dist de domain
+    "domain/dist" // Añadido para excluir carpeta dist de domain
   ]
 }
