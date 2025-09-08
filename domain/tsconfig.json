@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.json",
+
   "compilerOptions": {
     "composite": true, /* Enable constraints that allow a TypeScript project to be used with project references. */
     "target": "es2016", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
