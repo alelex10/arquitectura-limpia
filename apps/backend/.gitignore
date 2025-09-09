@@ -2,7 +2,13 @@
 /dist
 /node_modules
 /build
+<<<<<<< HEAD
 *.tsbuildinfo
+=======
+
+
+.tsbuildinfo
+>>>>>>> 86fd8f843f275cba588f2c31f028734fb7d9435e
 # Logs
 logs
 *.log
