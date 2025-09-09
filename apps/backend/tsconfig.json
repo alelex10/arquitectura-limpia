@@ -20,11 +20,11 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-  /*   "paths": {
+    "paths": {
       "@domain/*": [
-        "domain/src/*"
+        "../../domain/src/*"
       ]
-    } */
+    }
   },
   "include": [
     "src/**/*.ts",// Incluye todos los archivos .ts dentro de la carpeta src
@@ -34,9 +34,9 @@
     "dist",
     "**/*.test.ts" // Excluye tests localmente
   ],
-/*   "references": [
+  "references": [
     {
       "path": "../../domain"
     }
-  ] */
+  ]
 }
