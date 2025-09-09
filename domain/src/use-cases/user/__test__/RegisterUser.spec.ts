@@ -59,7 +59,7 @@ describe("RegisterUser use-case", async () => {
 		expect(result).toEqual(createInvalidDataError("Password is required"));
 	});
 
-	test("With valid data, register a new user", async () => {
+	test("With valid data, register a new user and return it", async () => {
 		const payload: RegisterUserDto = {
 			name: "ale",
 			email: "aa@a.com",
@@ -69,7 +69,8 @@ describe("RegisterUser use-case", async () => {
 		const result = await registerUserUseCase(dependencies, payload);
 
 		// Verificamos que el resultado sea undefined (sin errores)
-		expect(result).toBeUndefined();
+		// como resultado esperado un user
+		expect(result).toEqual({ ...payload, id: expect.any(String), Role: "USER" });
 		console.log("dependencies", dependencies);
 		// Verificamos que el usuario fue creado
 		const user = await userRepositoryMock.findByEmail(payload.email);

@@ -6,8 +6,10 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() createUserDto: RegisterUserDto) {
-    return this.userService.create(createUserDto);
+  async create(@Body() createUserDto: RegisterUserDto) {
+    const result = await this.userService.registeUser(createUserDto);
+    // console.log('result Controller', result);
+    return result;
   }
 
   @Get()

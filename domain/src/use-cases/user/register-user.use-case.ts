@@ -10,7 +10,7 @@ export interface RegisterUserDependencies {
 export async function registerUserUseCase(
   { userRepository }: RegisterUserDependencies,
   { email, name: username, password }: RegisterUserDto
-): Promise<InvalidDataError | void> {
+): Promise<InvalidDataError | void | User> {
   const hasError = validateData(email, username, password);
   if (hasError) {
     return hasError;
@@ -30,7 +30,7 @@ export async function registerUserUseCase(
     Role: "USER",
   };
 
-  await userRepository.create(user);
+  return await userRepository.create(user);
 }
 
 function validateData(
