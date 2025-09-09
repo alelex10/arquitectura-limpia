@@ -16,7 +16,7 @@ export function mockDocumentRepository(docs: Document[] = []): DocumentRepositor
 				title: doc.title ?? "",
 				content: doc.content ?? "",
 				ownerId: doc.ownerId ?? "",
-				collaborators: doc.collaborators ?? [],
+				// collaborators: doc.collaborators ?? [],
 				createdAt: new Date(),
 				updatedAt: new Date(),
 			};
@@ -40,7 +40,8 @@ export function mockDocumentRepository(docs: Document[] = []): DocumentRepositor
 			return doc;
 		},
 		findByOwnerId: async (ownerId) => {
-			return docs.filter((x) => x.ownerId === ownerId);
+			if (!ownerId) return null;
+			return await docs.filter((x) => x.ownerId === ownerId);
 		},
 	};
 }

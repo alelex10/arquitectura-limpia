@@ -1,7 +1,3 @@
 dist
 node_modules
-.tsbuildinfo
-<<<<<<< HEAD
 *.tsbuildinfo
-=======
->>>>>>> 86fd8f843f275cba588f2c31f028734fb7d9435e

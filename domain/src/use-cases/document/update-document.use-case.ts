@@ -27,11 +27,11 @@ export async function UpdateDocument(
 
 	// permiso: owner o editor
 	const isOwner = doc.ownerId === dto.userId;
-	const hasEditor = (doc.collaborators ?? []).some(
+/* 	const hasEditor = (doc.collaborators ?? []).some(
 		(c) => c.userId == dto.userId && (c.permission === "EDITOR" || c.permission === "OWNER")
-	);
+	); */
 
-	if (!isOwner && !hasEditor) {
+	if (!isOwner ) {
 		return createInvalidDataError("Not authorized to update document");
 	}
 

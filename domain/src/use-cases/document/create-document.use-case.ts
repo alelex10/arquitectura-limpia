@@ -9,17 +9,19 @@ export type CreateDocumentDTO = {
 	ownerId: string;
 };
 
-export interface CreateDocumentDeps {
+export interface CreateDocumentDependencies {
 	documents: IDocumentRepository;
-	versions: IVersionRepository;
+	// versions: IVersionRepository;
 }
 
 export async function CreateDocument(
-	{ documents, versions }: CreateDocumentDeps,
+	//  mook documentService
+	{ documents }: CreateDocumentDependencies,
+	// mock DocumentDto
 	dto: CreateDocumentDTO
 ): Promise<InvalidDataError | Document> {
-	if (!dto.title || dto.title.trim() === "") {
-		return createInvalidDataError("Title is required");
+	if (dto.title.trim() === "") {
+		dto.title = "new document";
 	}
 	if (!dto.ownerId) {
 		return createInvalidDataError("OwnerId is required");
@@ -32,13 +34,12 @@ export async function CreateDocument(
 	});
 
 	// crear versión inicial
-	await versions.create({
+	/* 	await versions.create({
 		documentId: created.id,
 		content: created.content ?? "",
 		version: 1,
 		createdBy: dto.ownerId,
-	});
+	}); */
 
 	return created;
 }
-
