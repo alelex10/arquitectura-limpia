@@ -2,7 +2,7 @@ import { User } from "../../entities/user.entity";
 import { createInvalidDataError, InvalidDataError } from "../../errors/errors";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
-export type LoginUserPayload = Pick<User, "email" | "password">;
+export type LoginUserDto = Pick<User, "email" | "password">;
 
 export interface LoginUserDependencies {
 	userRepository: IUserRepository;
@@ -10,14 +10,14 @@ export interface LoginUserDependencies {
 
 export async function LoginUser(
 	{ userRepository }: LoginUserDependencies,
-	{ email, password }: LoginUserPayload
+	{ email, password }: LoginUserDto
 ): Promise<User | InvalidDataError> {
 	const hasError = validateData(email, password);
 	if (hasError) {
 		return hasError;
 	}
 	const existingUser = await userRepository.findByEmail(email);
-	console.log("dependencies", userRepository)
+	console.log("dependencies", userRepository);
 	if (!existingUser) {
 		return createInvalidDataError("No user found for this email");
 	} else if (existingUser.password !== password) {
@@ -35,5 +35,3 @@ function validateData(email: string, password: string): InvalidDataError | void 
 		return createInvalidDataError("Password is required");
 	}
 }
-
-
