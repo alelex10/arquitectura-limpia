@@ -1,20 +1,24 @@
 import { Injectable } from '@nestjs/common';
-
-import { PrismaService } from '../prisma.service';
+import * as bcrypt from 'bcrypt';
 import {
   RegisterUserDto,
   registerUserUseCase,
 } from '@domain/use-cases/user/register-user.use-case';
 import { User } from '@domain/entities/user.entity';
 import { IUserRepository } from '@domain/repositories/IUserRepository';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UserService implements IUserRepository {
-  // constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  private prisma = new PrismaService();
+  // private prisma = new PrismaService();
 
   async registeUser(userDto: RegisterUserDto) {
+    const saltOrRounds = 10;
+    const hash = await bcrypt.hash(userDto.password, saltOrRounds);
+    userDto.password = hash;
+
     const result = await registerUserUseCase({ userRepository: this }, userDto);
     // console.log('result', result);
     return result;
