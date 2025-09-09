@@ -4,9 +4,9 @@
     "composite": true,
     "target": "es2016",
     "module": "commonjs",
-    // "rootDir": "./src",
+    "rootDir": "./src",
     "moduleResolution": "node",
-    // "baseUrl": "./", // se elimina para usar paths desde el tsconfig raíz
+    "baseUrl": "./", // se elimina para usar paths desde el tsconfig raíz
     "declaration": true,
     "declarationMap": true,
     "noEmit": false,
@@ -17,7 +17,10 @@
     "strict": true,
     "skipLibCheck": true
   },
-
+  "include": [
+    "src/**/*.ts"
+    
+  ],
   "exclude": [
     "node_modules",
     "dist",

@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
 
+// import { User } from '@domain/entities/user.entity';
+// import { IUserRepository } from '@domain/repositories/IUserRepository';
+import { PrismaService } from '../prisma.service';
+import { RegisterUserDto, registerUserUseCase } from '@domain/use-cases/user/register-user.use-case';
 import { User } from '@domain/entities/user.entity';
 import { IUserRepository } from '@domain/repositories/IUserRepository';
-import { PrismaService } from '../prisma.service';
-import { RegisterUserDto, registerUserUseCase } from '../../../../domain/src/use-cases/user/register-user.use-case';
 
 @Injectable()
 export class UserService implements IUserRepository {
