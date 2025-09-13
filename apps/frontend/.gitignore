@@ -16,12 +16,10 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
-*storybook.log
-storybook-static
+.DS_Store
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
