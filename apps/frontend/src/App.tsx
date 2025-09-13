@@ -1,8 +1,7 @@
-import "./App.css";
-import { Home } from "./pages/home";
+import { FormCustom } from "./components/form/FormCustom";
 
 function App() {
-	return <Home></Home>;
+	return <FormCustom />;
 }
 
 export default App;

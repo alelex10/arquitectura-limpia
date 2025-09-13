@@ -1,31 +1,11 @@
+import { NavBar } from "../components/navbar/NavBar";
+
 export const Home = () => {
 	return (
 		<div className="flex flex-col min-h-screen">
 			{/* NAVBAR */}
-			<nav className="bg-gray-900 text-white">
-				<div className="container mx-auto flex justify-between items-center py-4 px-6">
-					<h1 className="text-2xl font-bold">HackMD Clone</h1>
-					<ul className="flex space-x-6">
-						<li>
-							<a href="#features" className="hover:text-gray-300">
-								Características
-							</a>
-						</li>
-						<li>
-							<a href="#preview" className="hover:text-gray-300">
-								Preview
-							</a>
-						</li>
-						<li>
-							<a href="#about" className="hover:text-gray-300">
-								Sobre la App
-							</a>
-						</li>
-					</ul>
-					<button className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700">Probar Ahora</button>
-				</div>
-			</nav>
 
+			<NavBar></NavBar>
 			{/* HERO */}
 			<header className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex flex-col justify-center items-center text-center p-10">
 				<h2 className="text-4xl font-bold mb-4">Escribe, guarda y organiza tus documentos Markdown</h2>
