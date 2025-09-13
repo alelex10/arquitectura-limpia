@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 export const validationNameForm = (name: string) => {
 	if (!name) return "El nombre es requerido";
@@ -21,9 +22,58 @@ export const validationPasswordForm = (password: string) => {
 	return "";
 };
 
-export const validationRepeatPasswordForm = (password: string, repeatPassword: string) => {
-	if (!repeatPassword) return "La contraseña es requerida";
-	if (password !== repeatPassword) return "Las contraseñas no coinciden";
+export const validationRepeatPasswordForm = (repeatPassword: string) => {
+	if (!repeatPassword) return "Repita la contraseña";
 	return "";
+};
+export const useFormController = () => {
+	const [passwordAux, setPasswordAux] = useState("");
+	const [messageError, setMessageError] = useState({
+		name: "",
+		email: "",
+		password: "",
+		repeatPassword: "",
+	});
+
+	const handleSubmit = async (FormData: FormData) => {
+		/* fingir envio con timer */
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+	};
+
+	const handleInputName = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const name = event.target.value;
+		setMessageError((messageError) => ({ ...messageError, name: validationNameForm(name) }));
+	};
+
+	const handleInputEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const email = event.target.value;
+		setMessageError((messageError) => ({ ...messageError, email: validationEmailForm(email) }));
+	};
+
+	const handleInputPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const password = event.target.value;
+		setMessageError((messageError) => ({
+			...messageError,
+			password: validationPasswordForm(password),
+		}));
+		setPasswordAux(password);
+	};
+
+	const handleInputRepeatPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const repeatPassword = event.target.value;
+
+		setMessageError((messageError) => ({
+			...messageError,
+			repeatPassword: validationRepeatPasswordForm(passwordAux),
+		}));
+	};
+
+	return {
+		handleInputName,
+		handleInputEmail,
+		handleInputPassword,
+		handleInputRepeatPassword,
+		handleSubmit,
+	};
 };
 

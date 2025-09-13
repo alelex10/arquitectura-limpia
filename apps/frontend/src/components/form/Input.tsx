@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { MessageErrorFrom, type MessageErrorFromProps } from "./MessageErrorFrom";
+import type { CompareInputsProps } from "./FormCustom";
 
 // 1. Define las props específicas de tu componente si las hay.
 //    En tu ejemplo, solo 'color' es específica.
+
 interface MyInputSpecificProps {
 	children?: React.ReactNode;
 	validationInput?: (value: string) => string;
+	compared?: {
+		id: string;
+		setCompareInputs: React.Dispatch<React.SetStateAction<CompareInputsProps[] | undefined>>;
+	};
 	// Si tuvieras otras props solo para el componente Input, las pondrías aquí.
 	// Por ejemplo: customWrapperClassName?: string;
 }
@@ -20,13 +26,31 @@ export const Input = (props: InputProps) => {
 	// 4. Desestructura tus props específicas del objeto 'props'.
 	//    El operador '...' (rest operator) capturará el resto de las props
 	//    que son atributos válidos para el <input> HTML.
-	const { children, validationInput, ...inputAttributes } = props;
+	const { compared, children, validationInput, ...inputAttributes } = props;
 
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
+		const target = event.target;
 		setMessageError(validationInput ? validationInput(value) : "");
+
+		if (compared) {
+			compared.setCompareInputs((prevInputs) => {
+				if (prevInputs) {
+					return prevInputs.map((input) => {
+						if (input.id === compared.id) {
+							if (input.target.value !== value) {
+								setMessageError(`Los campos de ${target.name} y ${input.target.name} no coinciden`);
+							}
+						}
+						return input;
+					});
+				}
+				return [{ id: compared.id, target }];
+			});
+		}
 		// inputAttributes.onChange?.(event);
 	};
+
 	const renderChildren = () => {
 		return React.Children.map(children, (child, index) => {
 			if (!React.isValidElement(child)) {
@@ -42,7 +66,7 @@ export const Input = (props: InputProps) => {
 					? React.cloneElement(child as React.ReactElement<MessageErrorFromProps>, {
 							key: child.key || `error-message-${index}`,
 							// id: child.props.id || `error-message-${index}`,
-							children: messageError,
+							children: <>{messageError}</>,
 					  })
 					: null;
 			}
@@ -60,9 +84,9 @@ export const Input = (props: InputProps) => {
 				className={` ${inputAttributes.className || ""}`.trim()} // Aplica el color y cualquier otro className
 				onChange={handleOnChange}
 			/>
-
 			{renderChildren()}
 		</div>
 	);
 };
+
 
