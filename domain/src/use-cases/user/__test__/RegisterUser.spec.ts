@@ -21,6 +21,7 @@ describe("RegisterUser use-case", async () => {
 		const result = await registerUserUseCase(dependencies, payload);
 
 		expect(result).toEqual(createInvalidDataError("Email already in use"));
+		// expect(result).toThrow("Email already in use");
 	});
 
 	test("With an email is empty, fail with 'Email is required'", async () => {
@@ -30,9 +31,10 @@ describe("RegisterUser use-case", async () => {
 			password: "123",
 		};
 
-		const result = await registerUserUseCase(dependencies, payload);
+		// const result = Promise.reject(new Error('Test'))
+		const result = registerUserUseCase(dependencies, payload)
 
-		expect(result).toEqual(createInvalidDataError("Email is required"));
+		 expect(result).rejects.toThrowError("Email is required");
 	});
 
 	test("With an username is empty, fail with 'Username is required'", async () => {

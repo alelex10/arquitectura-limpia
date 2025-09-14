@@ -39,7 +39,7 @@ function validateData(
   password: string
 ): InvalidDataError | void {
   if (!email || email.trim() === "") {
-    return createInvalidDataError("Email is required");
+    throw new Error("Email is required");
   }
   if (!username || username.trim() === "") {
     return createInvalidDataError("Username is required");

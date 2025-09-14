@@ -16,7 +16,6 @@ export class UserService implements IUserRepository {
   // private prisma = new PrismaService();
 
   async registeUser(userDto: RegisterUserDto) {
-    console.log('userDto', userDto);
     const saltOrRounds = 10;
     const hash = await bcrypt.hash(userDto.password, saltOrRounds);
     userDto.password = hash;

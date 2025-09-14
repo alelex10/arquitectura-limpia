@@ -15,11 +15,10 @@ export class UserController {
 
   @Post('/register')
   async create(@Body() RegisterUserDto: RegisterUserDto) {
-    console.log('createUserDto', RegisterUserDto);
     const result = await this.userService.registeUser({
       ...RegisterUserDto,
     });
-    // console.log('result Controller', result);
+    console.log('result Controller', result);
     return result;
   }
 
