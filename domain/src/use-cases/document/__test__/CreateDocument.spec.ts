@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, test, beforeEach } from "vitest";
 import { CreateDocument, CreateDocumentDependencies, CreateDocumentDTO } from "../create-document.use-case";
 import { DocumentRepositoryMock, mockDocumentRepository } from "../../../mocks/document-repository-mock";
-import { mockVersionRepository } from "../../../mocks/version-repository-mock";
+// import { mockVersionRepository } from "../../../mocks/version-repository-mock";
 import { createInvalidDataError } from "../../../errors/errors";
-import { Document } from "../../../entities/document.entity";
-import { a, b } from "vitest/dist/chunks/suite.d.FvehnV49";
+// import { Document } from "../../../entities/document.entity";
+// import { a, b } from "vitest/dist/chunks/suite.d.FvehnV49";
 
 describe("CreateDocument use-case", () => {
 	let documentRepositoryMock: DocumentRepositoryMock;

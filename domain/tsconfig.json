@@ -6,7 +6,7 @@
     "module": "commonjs",
     "rootDir": "./src",
     "moduleResolution": "node",
-    "baseUrl": "./", // se elimina para usar paths desde el tsconfig raíz
+    "baseUrl": "./", 
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist"

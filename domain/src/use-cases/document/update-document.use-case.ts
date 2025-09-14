@@ -1,7 +1,7 @@
 import { createInvalidDataError, InvalidDataError } from "../../errors/errors";
 import { Document } from "../../entities/document.entity";
 import { IDocumentRepository } from "../../repositories/IDocumentRepository";
-import { IVersionRepository } from "../../repositories/IVersionRepository";
+// import { IVersionRepository } from "../../repositories/IVersionRepository";
 
 export type UpdateDocumentDTO = {
 	documentId: string;
@@ -12,11 +12,11 @@ export type UpdateDocumentDTO = {
 
 export interface UpdateDocumentDeps {
 	documents: IDocumentRepository;
-	versions: IVersionRepository;
+	// versions: IVersionRepository;
 }
 
 export async function UpdateDocument(
-	{ documents, versions }: UpdateDocumentDeps,
+	{ documents}: UpdateDocumentDeps,
 	dto: UpdateDocumentDTO
 ): Promise<InvalidDataError | Document> {
 	if (!dto.documentId) return createInvalidDataError("DocumentId is required");
@@ -44,16 +44,7 @@ export async function UpdateDocument(
 	const result = await documents.update(updated);
 
 	// si cambió contenido, crear nueva versión
-	if (dto.content !== undefined && dto.content !== doc.content) {
-		const existingVersions = await versions.findByDocumentId(doc.id);
-		const nextVersion = (existingVersions?.length ?? 0) + 1;
-		await versions.create({
-			documentId: doc.id,
-			content: dto.content,
-			version: nextVersion,
-			createdBy: dto.userId,
-		});
-	}
+
 
 	if (!result) {
 		return createInvalidDataError("Document not found");
