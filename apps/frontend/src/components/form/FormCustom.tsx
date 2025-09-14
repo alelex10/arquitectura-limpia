@@ -75,7 +75,8 @@ export const FormCustom = () => {
 							<MessageErrorFrom className={textErrorClasses} />
 						</Input>
 					</div>
-					<Button variant="secondary">Registrarse</Button>
+
+					<Button>Registrarse</Button>
 				</div>
 			</form>
 		</div>

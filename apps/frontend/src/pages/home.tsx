@@ -5,7 +5,7 @@ export const Home = () => {
 		<div className="flex flex-col min-h-screen">
 			{/* NAVBAR */}
 
-			<NavBar></NavBar>
+			
 			{/* HERO */}
 			<header className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex flex-col justify-center items-center text-center p-10">
 				<h2 className="text-4xl font-bold mb-4">Escribe, guarda y organiza tus documentos Markdown</h2>
