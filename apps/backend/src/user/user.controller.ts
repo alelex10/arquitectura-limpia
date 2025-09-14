@@ -1,13 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { RegisterUserDto } from '../../../../domain/src/use-cases/user/register-user.use-case';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  async create(@Body() createUserDto: RegisterUserDto) {
-    const result = await this.userService.registeUser(createUserDto);
+  @Post('/register')
+  async create(@Body() RegisterUserDto: RegisterUserDto) {
+    console.log('createUserDto', RegisterUserDto);
+    const result = await this.userService.registeUser({
+      ...RegisterUserDto,
+    });
     // console.log('result Controller', result);
     return result;
   }
@@ -22,7 +33,7 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
-/*   @Patch(':id')
+  /*   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   } */

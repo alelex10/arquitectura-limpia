@@ -1,5 +1,5 @@
 // src/components/form/FormCustom.tsx
-import { useState } from "react"; // Importa React y useState
+import { useState, type FormEvent } from "react"; // Importa React y useState
 import {
   validationEmailForm,
   validationNameForm,
@@ -10,6 +10,15 @@ import { Input } from "../../../components/form/Input";
 import { MessageErrorFrom } from "../../../components/form/MessageErrorFrom";
 import { Button } from "../../../components/button/Button";
 import { textErrorClasses } from "./FormLogin";
+import { fetchApi } from "../../../hook/fetchApi";
+import { REGISTER_USER } from "../../../constants/constants";
+
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+}
 
 export interface CompareInputsProps {
   id: string;
@@ -22,9 +31,28 @@ export const FormRegister = () => {
   //! El que deberia tener la logica para comparar los inputs es el form
 
   const [inputsCompared, setInputsCompared] = useState<CompareInputsProps[]>();
+
+  const handleAction = (formData: globalThis.FormData) => {
+    const data: FormData = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+      repeatPassword: formData.get("repeatPassword") as string,
+    };
+    console.log(data);
+    fetchApi({
+      endpoint: REGISTER_USER,
+      type: "POST",
+      body: data,
+    });
+  };
+
   return (
     <div className="container mx-auto px-6 py-16">
-      <form className="max-w-lg mx-auto p-8 bg-white/30 shadow-lg rounded-lg ">
+      <form
+        className="max-w-lg mx-auto p-8 bg-white/30 shadow-lg rounded-lg "
+        action={handleAction}
+      >
         <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
           Formulario de Registro
         </h2>

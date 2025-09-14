@@ -7,6 +7,7 @@ import {
 import { User } from '@domain/entities/user.entity';
 import { IUserRepository } from '@domain/repositories/IUserRepository';
 import { PrismaService } from '../prisma/prisma.service';
+import { CLIENT_RENEG_LIMIT } from 'tls';
 
 @Injectable()
 export class UserService implements IUserRepository {
@@ -15,6 +16,7 @@ export class UserService implements IUserRepository {
   // private prisma = new PrismaService();
 
   async registeUser(userDto: RegisterUserDto) {
+    console.log('userDto', userDto);
     const saltOrRounds = 10;
     const hash = await bcrypt.hash(userDto.password, saltOrRounds);
     userDto.password = hash;

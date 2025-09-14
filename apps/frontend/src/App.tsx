@@ -4,8 +4,7 @@ import { NavBar } from "./components/navbar/NavBar";
 import { AuthLayout } from "./pages/auth/auth-layout";
 import { FormRegister } from "./pages/auth/components/FormRegister";
 import { FormLogin } from "./pages/auth/components/FormLogin";
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 function App() {
   return (
