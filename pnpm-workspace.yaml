@@ -2,3 +2,4 @@ packages:
   - domain
   - apps/backend
   - apps/frontend
+  - apps/frontend2
