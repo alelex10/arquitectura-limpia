@@ -2,14 +2,12 @@ import { describe, it, expect } from "vitest";
 import { UpdateDocument } from "../update-document.use-case";
 import { mockDocumentRepository } from "../../../mocks/document-repository-mock";
 import { createInvalidDataError } from "../../../errors/errors";
-import { mockVersionRepository } from "../../../mocks/version-repository-mock";
 
 describe("UpdateDocument use-case", () => {
   it("fails if document not found", async () => {
     const docs = mockDocumentRepository([]);
-    const versions = mockVersionRepository([]);
     const res = await UpdateDocument(
-      { documents: docs, versions },
+      { documents: docs},
       { documentId: "x", userId: "u1", content: "new" }
     );
     expect(res).toEqual(createInvalidDataError("Document not found"));
