@@ -1,10 +1,7 @@
-import { NavBar } from "../components/navbar/NavBar";
-
 export const Home = () => {
 	return (
 		<div className="flex flex-col min-h-screen">
 			{/* NAVBAR */}
-
 			
 			{/* HERO */}
 			<header className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex flex-col justify-center items-center text-center p-10">
