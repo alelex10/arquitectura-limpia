@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { fetchApi } from "../../../hook/fetchApi";
-import { REGISTER_USER } from "../../../constants/constants";
+import { REGISTER_USER } from "../../../../constants/constants";
+import { fetchApi } from "../../../../api/fetchApi";
 
 // Esquema de validación con Zod
 export const registerSchema = z
