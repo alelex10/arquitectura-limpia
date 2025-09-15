@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router";
-import { AuthLayout } from "./pages/auth/layout/AurhLayout";
-import { FormRegister } from "./pages/auth/components/FormRegister";
-import { FormLogin } from "./pages/auth/components/FormLogin";
-import { Home } from "./pages/Home";
-import { MainLayout } from "./pages/layout/MainLayout";
+import { MainLayout } from "./pages/home/layout/MainLayout";
+import { Home } from "./pages/home/Home";
+import { AuthLayout } from "./pages/home/auth/layout/AurhLayout";
+import { FormLogin } from "./pages/home/auth/components/FormLogin";
+import { FormRegister } from "./pages/home/auth/components/FormRegister";
+
 
 function App() {
   return (
