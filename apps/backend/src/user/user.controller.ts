@@ -13,14 +13,7 @@ import { RegisterUserDto } from '../../../../domain/src/use-cases/user/register-
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('/register')
-  async create(@Body() RegisterUserDto: RegisterUserDto) {
-    const result = await this.userService.registeUser({
-      ...RegisterUserDto,
-    });
-    console.log('result Controller', result);
-    return result;
-  }
+
 
   @Get()
   findAll() {

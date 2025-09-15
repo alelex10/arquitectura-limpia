@@ -1,118 +1,126 @@
-// src/components/form/FormCustom.tsx
-import { useState, type FormEvent } from "react"; // Importa React y useState
-import {
-  validationEmailForm,
-  validationNameForm,
-  validationPasswordForm,
-  validationRepeatPasswordForm,
-} from "../validations/InputValidationCases";
-import { Input } from "../../../components/form/Input";
-import { MessageErrorFrom } from "../../../components/form/MessageErrorFrom";
-import { Button } from "../../../components/button/Button";
-import { textErrorClasses } from "./FormLogin";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { fetchApi } from "../../../hook/fetchApi";
 import { REGISTER_USER } from "../../../constants/constants";
 
-interface FormData {
-  name: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-}
+// Esquema de validación con Zod
+export const registerSchema = z
+  .object({
+    name: z.string().min(3, { message: "El nombre debe tener al menos 3 caracteres" }).max(20, { message: "El nombre no puede exceder los 20 caracteres" }),
+    email: z.email({ message: "Formato de email inválido" }),
+    password: z.string().min(8, { message: "La contraseña debe tener al menos 8 caracteres" }).max(20, { message: "La contraseña no puede exceder los 20 caracteres" }),
+    repeatPassword: z.string(),
+  })
+  .refine((data) => data.password === data.repeatPassword, {
+    message: "Las contraseñas no coinciden",
+    path: ["repeatPassword"], // Asocia el error al campo repeatPassword
+  });
 
-export interface CompareInputsProps {
-  id: string;
-  target: EventTarget & HTMLInputElement;
-}
-const commonInputClasses =
-  "w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out";
+// Tipado para los datos del formulario
+type RegisterFormData = z.infer<typeof registerSchema>;
 
 export const FormRegister = () => {
-  //! El que deberia tener la logica para comparar los inputs es el form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }, // Para acceder a los errores de validación
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    mode: "onChange",
 
-  const [inputsCompared, setInputsCompared] = useState<CompareInputsProps[]>();
+  });
 
-  const handleAction = (formData: globalThis.FormData) => {
-    const data: FormData = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-      repeatPassword: formData.get("repeatPassword") as string,
-    };
-    console.log(data);
-    fetchApi({
-      endpoint: REGISTER_USER,
-      type: "POST",
-      body: data,
-    });
-  };
+  const onSubmit = handleSubmit((data) => {
+    fetchApi({ endpoint: REGISTER_USER, type: "POST", body: data });
+    console.log("Datos del formulario:", data);
+  });
+
+  const commonInputClasses =
+    "w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out";
+  const errorInputClasses = "border-red-500 focus:ring-red-500";
+  const textErrorClasses = "text-red-500 text-sm mt-1";
 
   return (
     <div className="container mx-auto px-6 py-16">
-      <form
-        className="max-w-lg mx-auto p-8 bg-white/30 shadow-lg rounded-lg "
-        action={handleAction}
-      >
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Formulario de Registro
-        </h2>
+      <form onSubmit={onSubmit} className="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200">
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Formulario de Registro</h2>
         <div className="space-y-6">
+          {/* Campo de Nombre */}
           <div>
-            <Input
-              className={commonInputClasses}
-              type="text"
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+            <input
               id="name"
-              name="name"
-              validationInput={validationNameForm}
-            >
-              <MessageErrorFrom className={textErrorClasses} />
-            </Input>
-          </div>
-          <div>
-            <Input
-              className={commonInputClasses}
-              type="email"
-              id="email"
-              name="email"
-              validationInput={validationEmailForm}
-            >
-              <MessageErrorFrom className={textErrorClasses} />
-            </Input>
-          </div>
-          {/* Input de Contraseña */}
-          <div>
-            <Input
-              className={commonInputClasses}
-              type="password"
-              id="password"
-              name="password"
-              validationInput={validationPasswordForm}
-              compared={{
-                id: "repeat-password",
-                setCompareInputs: setInputsCompared,
-              }}
-            >
-              <MessageErrorFrom className={textErrorClasses} />
-            </Input>
-          </div>
-          {/* Input de Repetir Contraseña */}
-          <div>
-            <Input
-              className={commonInputClasses}
-              type="password"
-              id="repeat-password"
-              name="repeat-password"
-              validationInput={validationRepeatPasswordForm}
-              compared={{
-                id: "repeat-password",
-                setCompareInputs: setInputsCompared,
-              }} // Corregido para comparar con 'password'
-            >
-              <MessageErrorFrom className={textErrorClasses} />
-            </Input>
+              type="text"
+              className={`${commonInputClasses} ${errors.name ? errorInputClasses : ""}`}
+              {...register("name")}
+              aria-invalid={errors.name ? "true" : "false"}
+            />
+            {errors.name && (
+              <p className={textErrorClasses} role="alert">
+                {errors.name.message}
+              </p>
+            )}
           </div>
 
-          <Button variant="indigo">Registrarme</Button>
+          {/* Campo de Email */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              id="email"
+              type="email"
+              className={`${commonInputClasses} ${errors.email ? errorInputClasses : ""}`}
+              {...register("email")}
+              aria-invalid={errors.email ? "true" : "false"}
+            />
+            {errors.email && (
+              <p className={textErrorClasses} role="alert">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          {/* Campo de Contraseña */}
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+            <input
+              id="password"
+              type="password"
+              className={`${commonInputClasses} ${errors.password ? errorInputClasses : ""}`}
+              {...register("password")}
+              aria-invalid={errors.password ? "true" : "false"}
+            />
+            {errors.password && (
+              <p className={textErrorClasses} role="alert">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          {/* Campo de Repetir Contraseña */}
+          <div>
+            <label htmlFor="repeatPassword" className="block text-sm font-medium text-gray-700 mb-1">Repetir Contraseña</label>
+            <input
+              id="repeatPassword"
+              type="password"
+              className={`${commonInputClasses} ${errors.repeatPassword ? errorInputClasses : ""}`}
+              {...register("repeatPassword")}
+              aria-invalid={errors.repeatPassword ? "true" : "false"}
+            />
+            {errors.repeatPassword && (
+              <p className={textErrorClasses} role="alert">
+                {errors.repeatPassword.message}
+              </p>
+            )}
+          </div>
+
+          {/* Botón de Envío */}
+          <button
+            type="submit"
+            className="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+          >
+            Registrarse
+          </button>
         </div>
       </form>
     </div>

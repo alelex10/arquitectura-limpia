@@ -1,49 +1,98 @@
-import { Input } from "../../../components/form/Input";
-import { MessageErrorFrom } from "../../../components/form/MessageErrorFrom";
-import {
-  validationEmailForm,
-  validationPasswordForm,
-} from "../validations/InputValidationCases";
-import { Button } from "../../../components/button/Button";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-export const commonInputClasses =
-  "w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out";
+export const loginSchema = z.object({
+  email: z.string().email({ message: "Formato de email inválido" }),
+  password: z
+    .string()
+    .min(8, { message: "La contraseña debe tener al menos 8 caracteres" }),
+});
 
-export const textErrorClasses = "text-red-600 text-sm font-bold";
+type LoginFormData = z.infer<typeof loginSchema>;
 
 export const FormLogin = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    console.log("Datos del login:", data);
+  });
+
+  const commonInputClasses =
+    "w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out";
+  const errorInputClasses = "border-red-500 focus:ring-red-500";
+  const textErrorClasses = "text-red-500 text-sm mt-1";
+
   return (
-    <div className="container mx-auto px-6 py-16 ">
-      <form className="max-w-lg mx-auto p-8 bg-white/30 shadow-lg rounded-lg ">
+    <div className="container mx-auto px-6 py-16">
+      <form
+        onSubmit={onSubmit}
+        className="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200"
+      >
         <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Formulario de Iniciar Sesion
+          Iniciar Sesión
         </h2>
         <div className="space-y-6">
           <div>
-            <Input
-              className={commonInputClasses}
-              type="email"
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Email
+            </label>
+            <input
               id="email"
-              name="email"
-              validationInput={validationEmailForm}
-            >
-              <MessageErrorFrom className={textErrorClasses} />
-            </Input>
-          </div>
-          {/* Input de Contraseña */}
-          <div>
-            <Input
-              className={commonInputClasses}
-              type="password"
-              id="password"
-              name="password"
-              validationInput={validationPasswordForm}
-            >
-              <MessageErrorFrom className={textErrorClasses} />
-            </Input>
+              type="email"
+              className={`${commonInputClasses} ${
+                errors.email ? errorInputClasses : ""
+              }`}
+              {...register("email")}
+              aria-invalid={errors.email ? "true" : "false"}
+              placeholder="tu.email@ejemplo.com"
+            />
+            {errors.email && (
+              <p className={textErrorClasses} role="alert">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
-          <Button variant="indigo">Registrarme</Button>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Contraseña
+            </label>
+            <input
+              id="password"
+              type="password"
+              className={`${commonInputClasses} ${
+                errors.password ? errorInputClasses : ""
+              }`}
+              {...register("password")}
+              aria-invalid={errors.password ? "true" : "false"}
+              placeholder="••••••••"
+            />
+            {errors.password && (
+              <p className={textErrorClasses} role="alert">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+          >
+            Iniciar Sesión
+          </button>
         </div>
       </form>
     </div>

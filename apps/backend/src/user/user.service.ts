@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import {
   RegisterUserDto,
@@ -8,22 +13,13 @@ import { User } from '@domain/entities/user.entity';
 import { IUserRepository } from '@domain/repositories/IUserRepository';
 import { PrismaService } from '../prisma/prisma.service';
 import { CLIENT_RENEG_LIMIT } from 'tls';
+import { InvalidDataError } from '@domain/errors/errors';
 
 @Injectable()
 export class UserService implements IUserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   // private prisma = new PrismaService();
-
-  async registeUser(userDto: RegisterUserDto) {
-    const saltOrRounds = 10;
-    const hash = await bcrypt.hash(userDto.password, saltOrRounds);
-    userDto.password = hash;
-
-    const result = await registerUserUseCase({ userRepository: this }, userDto);
-    // console.log('result', result);
-    return result;
-  }
 
   async create(userDto: RegisterUserDto): Promise<User> {
     const user: User = await this.prisma.user.create({ data: userDto });

@@ -22,7 +22,8 @@ export const validationPasswordForm = (password: string) => {
 	return "";
 };
 
-export const validationRepeatPasswordForm = (repeatPassword: string) => {
+export const validationRepeatPasswordForm = (repeatPassword: string, passwordAux: string) => {
+	if (repeatPassword !== passwordAux) return "Las contraseñas no coinciden";
 	if (!repeatPassword) return "Repita la contraseña";
 	return "";
 };
@@ -33,6 +34,7 @@ export const useFormController = () => {
 		email: "",
 		password: "",
 		repeatPassword: "",
+		button:"",
 	});
 
 	const handleSubmit = async (FormData: FormData) => {
@@ -61,14 +63,16 @@ export const useFormController = () => {
 
 	const handleInputRepeatPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const repeatPassword = event.target.value;
-
+		console.log(passwordAux, repeatPassword);
 		setMessageError((messageError) => ({
 			...messageError,
-			repeatPassword: validationRepeatPasswordForm(passwordAux),
+			repeatPassword: validationRepeatPasswordForm(passwordAux, repeatPassword),
 		}));
 	};
 
 	return {
+		messageError,
+		setMessageError,
 		handleInputName,
 		handleInputEmail,
 		handleInputPassword,

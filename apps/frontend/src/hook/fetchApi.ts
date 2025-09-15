@@ -24,11 +24,13 @@ export const fetchApi = async <T>({
       body: JSON.stringify(body),
     });
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      console.error(await response.json());
+      throw new Error(await response.json());
     }
     const responseJson: T = await response.json();
+    console.log(responseJson);
     return responseJson;
   } catch (error: any) {
-    console.log(error.message);
+    
   }
 };
