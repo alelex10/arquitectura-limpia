@@ -1,0 +1,32 @@
+name: clean-arquitecture
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend.dockerfile
+    container_name: backend
+    image: backend:1.0.0
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/backend
+    # env_file:
+    #   - .env
+    # environment:
+    #   - PORT=3000
+    #   - DB_HOST=postgres
+    #   - DB_PORT=5432
+    #   - DB_USER=postgres
+    #   - DB_PASSWORD=postgres
+    #   - DB_NAME=postgres
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.dockerfile
+    container_name: frontend
+    image: frontend:1.0.0
+    ports:
+      - 4173:4173
+    volumes:
+      - ./frontend:/frontend

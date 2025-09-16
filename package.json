@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"build:domain": "pnpm --filter ./domain run build",
-		"dev:backend": "pnpm run build:domain && pnpm --filter ./apps/backend run start:dev"
+		"dev:backend": "pnpm run build:domain && pnpm --filter ./apps/backend run start:dev",
+		"start:backend": " pnpm run build:domain && pnpm --filter ./apps/backend run start:prod"
 	},
 	"devDependencies": {
 		"typescript": "^5.8.3",

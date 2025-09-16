@@ -37,7 +37,7 @@ export const useFormController = () => {
 		button:"",
 	});
 
-	const handleSubmit = async (FormData: FormData) => {
+	const handleSubmit = async () => {
 		/* fingir envio con timer */
 		await new Promise((resolve) => setTimeout(resolve, 1000));
 	};
