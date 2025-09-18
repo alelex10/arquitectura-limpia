@@ -27,10 +27,10 @@ export const LinksHome = () => {
             </li>
           </ul>
           <div className="flex space-x-4">
-            <Link to="/register">
+            <Link to="register">
               <Button variant="indigo">Registrarse</Button>
             </Link>
-            <Link to="/login">
+            <Link to="login">
               <Button variant="blue">Iniciar Sesion</Button>
             </Link>
           </div>
