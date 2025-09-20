@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import { Button } from "../../components/button/Button";
+import type { Route } from "./+types/Home";
 
-export async function loader() {
+export async function loader({}: Route.LoaderArgs) {
+  console.log("Loader de Home");
   return null;
 }
 
@@ -132,5 +134,4 @@ export const Home = () => {
     </div>
   );
 };
-
 export default Home;
