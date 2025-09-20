@@ -1,0 +1,104 @@
+import React, { useState } from "react";
+import {
+  MessageErrorFrom,
+  type MessageErrorFromProps,
+} from "./MessageErrorFrom";
+import type { CompareInputsProps } from "./FormCustom";
+
+// 1. Define las props específicas de tu componente si las hay.
+//    En tu ejemplo, solo 'color' es específica.
+
+interface MyInputSpecificProps {
+  children?: React.ReactNode;
+  validationInput?: (value: string) => string;
+  compared?: {
+    id: string;
+    setCompareInputs: React.Dispatch<
+      React.SetStateAction<CompareInputsProps[] | undefined>
+    >;
+  };
+  // Si tuvieras otras props solo para el componente Input, las pondrías aquí.
+  // Por ejemplo: customWrapperClassName?: string;
+}
+
+// 2. Combina las props específicas con los atributos estándar de un input HTML.
+//    React.InputHTMLAttributes<HTMLInputElement> cubre todas las props de un <input>.
+interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement>,
+    MyInputSpecificProps {}
+
+// 3. Define el componente Input para que acepte estas props.
+export const Input = (props: InputProps) => {
+  const [messageError, setMessageError] = useState("");
+  // 4. Desestructura tus props específicas del objeto 'props'.
+  //    El operador '...' (rest operator) capturará el resto de las props
+  //    que son atributos válidos para el <input> HTML.
+  const { compared, children, validationInput, ...inputAttributes } = props;
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const target = event.target;
+    setMessageError(validationInput ? validationInput(value) : "");
+
+    if (compared) {
+      compared.setCompareInputs((prevInputs) => {
+        if (prevInputs) {
+          return prevInputs.map((input) => {
+            if (input.id === compared.id) {
+              if (input.target.value !== value) {
+                setMessageError(
+                  `Los campos de ${target.name} y ${input.target.name} no coinciden`
+                );
+              }
+            }
+            return input;
+          });
+        }
+        return [{ id: compared.id, target }];
+      });
+    }
+    // inputAttributes.onChange?.(event);
+  };
+
+  const renderChildren = () => {
+    return React.Children.map(children, (child, index) => {
+      if (!React.isValidElement(child)) {
+        return child; // Devuelve strings, números, null, etc. tal cual
+      }
+      // Añadimos el índice para la key
+      // --- Tipeo Correcto ---
+      // Verificamos si el elemento es un MessageError
+      // Si es así, lo tipamos como React.ReactElement<MessageErrorProps>
+      if (child.type === MessageErrorFrom) {
+        // ... (lógica de clonación)
+        return messageError
+          ? React.cloneElement(
+              child as React.ReactElement<MessageErrorFromProps>,
+              {
+                key: child.key || `error-message-${index}`,
+                // id: child.props.id || `error-message-${index}`,
+                children: <>{messageError}</>,
+              }
+            )
+          : null;
+      }
+      // Si no es MessageError, lo devolvemos como React.ReactElement<any> o más genérico
+      return React.cloneElement(child, { key: child.key });
+    });
+  };
+  // 5. Renderiza el input, aplicando tus props específicas y propagando el resto.
+  return (
+    <div>
+      {inputAttributes.name && (
+        <label htmlFor={inputAttributes.id}>{inputAttributes.name}</label>
+      )}
+
+      <input
+        {...inputAttributes} // Propaga todas las props que no son 'color'
+        className={` ${inputAttributes.className || ""}`.trim()} // Aplica el color y cualquier otro className
+		// onChange={handleOnChange}
+      />
+      {renderChildren()}
+    </div>
+  );
+};
