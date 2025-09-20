@@ -5,6 +5,7 @@ interface Props {
   token?: string;
   type?: "GET" | "POST" | "PUT" | "DELETE";
   body: any;
+  // redirectTo?: string;
 }
 
 export const fetchApi = async <T>({
@@ -31,6 +32,6 @@ export const fetchApi = async <T>({
     console.log(responseJson);
     return responseJson;
   } catch (error: any) {
-    
+    throw new Error(error.message);
   }
 };

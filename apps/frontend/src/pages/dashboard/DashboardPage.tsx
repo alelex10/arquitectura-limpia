@@ -2,17 +2,19 @@
 import { Plus, Trash2, Edit3 } from "lucide-react";
 import { SideBar } from "./components/SideBar";
 
-export function Dashboard() {
-  const documentos = [
-    { id: 1, titulo: "Notas de reunión", fecha: "2025-09-12" },
-    { id: 2, titulo: "Plan de proyecto", fecha: "2025-09-10" },
-    { id: 3, titulo: "Ideas rápidas", fecha: "2025-09-05" },
-  ];
+const documentos = [
+  { id: 1, titulo: "Notas de reunión", fecha: "2025-09-12" },
+  { id: 2, titulo: "Plan de proyecto", fecha: "2025-09-10" },
+  { id: 3, titulo: "Ideas rápidas", fecha: "2025-09-05" },
+];
 
+
+
+export function Dashboard() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* SIDEBAR */}
-      
+
       <SideBar />
 
       {/* MAIN CONTENT */}

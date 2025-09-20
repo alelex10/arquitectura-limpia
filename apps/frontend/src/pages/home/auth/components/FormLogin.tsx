@@ -1,22 +1,14 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
-export const loginSchema = z.object({
-  email: z.string().email({ message: "Formato de email inválido" }),
-  password: z
-    .string()
-    .min(8, { message: "La contraseña debe tener al menos 8 caracteres" }),
-});
-
-type LoginFormData = z.infer<typeof loginSchema>;
+import { loginSchema, type LoginSchemaType } from "../schemas/authSchema";
 
 export const FormLogin = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
+  } = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
   });
 

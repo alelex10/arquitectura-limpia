@@ -1,40 +1,24 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { REGISTER_USER } from "../../../../constants/constants";
-import { fetchApi } from "../../../../api/fetchApi";
+import { registerSchema, type RegisterFormData } from "../schemas/authSchema";
+import { Form } from "react-router";
+import type { Route } from "./+types/FormRegister";
 
-// Esquema de validación con Zod
-export const registerSchema = z
-  .object({
-    name: z.string().min(3, { message: "El nombre debe tener al menos 3 caracteres" }).max(20, { message: "El nombre no puede exceder los 20 caracteres" }),
-    email: z.email({ message: "Formato de email inválido" }),
-    password: z.string().min(8, { message: "La contraseña debe tener al menos 8 caracteres" }).max(20, { message: "La contraseña no puede exceder los 20 caracteres" }),
-    repeatPassword: z.string(),
-  })
-  .refine((data) => data.password === data.repeatPassword, {
-    message: "Las contraseñas no coinciden",
-    path: ["repeatPassword"], // Asocia el error al campo repeatPassword
-  });
 
-// Tipado para los datos del formulario
-type RegisterFormData = z.infer<typeof registerSchema>;
-
-export const FormRegister = () => {
+export default function FormRegister() {
   const {
     register,
     handleSubmit,
-    formState: { errors }, // Para acceder a los errores de validación
+    formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     mode: "onChange",
-
   });
 
-  const onSubmit = handleSubmit((data) => {
-    fetchApi({ endpoint: REGISTER_USER, type: "POST", body: data });
-    console.log("Datos del formulario:", data);
-  });
+  // const onSubmit = handleSubmit((data) => {
+  //   fetchApi({ endpoint: REGISTER_USER, type: "POST", body: data });
+  //   console.log("Datos del formulario:", data);
+  // });
 
   const commonInputClasses =
     "w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out";
@@ -43,17 +27,29 @@ export const FormRegister = () => {
 
   return (
     <div className="container mx-auto px-6 py-16">
-      <form onSubmit={onSubmit} className="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Formulario de Registro</h2>
+      <Form
+        method="post"
+        action="/register"
+        className="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200"
+      >
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+          Formulario de Registro
+        </h2>
         <div className="space-y-6">
           {/* Campo de Nombre */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Nombre
+            </label>
             <input
               id="name"
               type="text"
               className={`${commonInputClasses} ${errors.name ? errorInputClasses : ""}`}
               {...register("name")}
+              name="name"
               aria-invalid={errors.name ? "true" : "false"}
             />
             {errors.name && (
@@ -65,12 +61,18 @@ export const FormRegister = () => {
 
           {/* Campo de Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Email
+            </label>
             <input
               id="email"
               type="email"
               className={`${commonInputClasses} ${errors.email ? errorInputClasses : ""}`}
               {...register("email")}
+              name="email"
               aria-invalid={errors.email ? "true" : "false"}
             />
             {errors.email && (
@@ -82,12 +84,18 @@ export const FormRegister = () => {
 
           {/* Campo de Contraseña */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Contraseña
+            </label>
             <input
               id="password"
               type="password"
               className={`${commonInputClasses} ${errors.password ? errorInputClasses : ""}`}
               {...register("password")}
+              name="password"
               aria-invalid={errors.password ? "true" : "false"}
             />
             {errors.password && (
@@ -99,12 +107,18 @@ export const FormRegister = () => {
 
           {/* Campo de Repetir Contraseña */}
           <div>
-            <label htmlFor="repeatPassword" className="block text-sm font-medium text-gray-700 mb-1">Repetir Contraseña</label>
+            <label
+              htmlFor="repeatPassword"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Repetir Contraseña
+            </label>
             <input
               id="repeatPassword"
               type="password"
               className={`${commonInputClasses} ${errors.repeatPassword ? errorInputClasses : ""}`}
               {...register("repeatPassword")}
+              name="repeatPassword"
               aria-invalid={errors.repeatPassword ? "true" : "false"}
             />
             {errors.repeatPassword && (
@@ -122,9 +136,7 @@ export const FormRegister = () => {
             Registrarse
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
-};
-
-export default FormRegister;
+}
