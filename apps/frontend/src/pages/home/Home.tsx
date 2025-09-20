@@ -1,6 +1,10 @@
 import { Link } from "react-router";
 import { Button } from "../../components/button/Button";
 
+export async function loader() {
+  return null;
+}
+
 export const Home = () => {
   return (
     <div className="flex flex-col min-h-screen">
