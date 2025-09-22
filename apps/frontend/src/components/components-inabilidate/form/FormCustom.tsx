@@ -1,6 +1,6 @@
 // src/components/form/FormCustom.tsx
 import { useState } from "react"; // Importa React y useState
-import { Input } from "./Input";
+import { Input } from "./InputCustomtsx";
 import { MessageErrorFrom } from "./MessageErrorFrom";
 import {
 	validationEmailForm,
@@ -8,7 +8,7 @@ import {
 	validationPasswordForm,
 	validationRepeatPasswordForm,
 } from "./InputValidationCases";
-import { Button } from "../button/Button";
+import { Button } from "../../button/Button";
 
 export interface CompareInputsProps {
 	id: string;
