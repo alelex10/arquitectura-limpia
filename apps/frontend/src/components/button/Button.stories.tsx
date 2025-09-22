@@ -20,7 +20,7 @@ export const Default: Story = {
   args: {
     children: "Button",
     variant: "blue",
-    isLoading: true,
+    isLoading: false,
     hasRing: false,
   },
 };
