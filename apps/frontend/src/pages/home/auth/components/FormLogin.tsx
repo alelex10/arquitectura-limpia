@@ -1,15 +1,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Form } from "react-router";
+import { loginSchema, type LoginFormData } from "../schemas/authSchema";
 
-export const loginSchema = z.object({
-  email: z.string().email({ message: "Formato de email inválido" }),
-  password: z
-    .string()
-    .min(8, { message: "La contraseña debe tener al menos 8 caracteres" }),
-});
 
-type LoginFormData = z.infer<typeof loginSchema>;
 
 export const FormLogin = () => {
   const {
@@ -31,7 +25,7 @@ export const FormLogin = () => {
 
   return (
     <div className="container mx-auto px-6 py-16">
-      <form
+      <Form
         onSubmit={onSubmit}
         className="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg border border-gray-200"
       >
@@ -94,7 +88,8 @@ export const FormLogin = () => {
             Iniciar Sesión
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };
+export default FormLogin;

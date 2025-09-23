@@ -8,3 +8,5 @@ export const MainLayout = () => {
     </>
   );
 };
+
+export default MainLayout;

@@ -28,7 +28,7 @@ interface InputProps
     MyInputSpecificProps {}
 
 // 3. Define el componente Input para que acepte estas props.
-export const Input = (props: InputProps) => {
+export const InputCustomTest = (props: InputProps) => {
   const [messageError, setMessageError] = useState("");
   // 4. Desestructura tus props específicas del objeto 'props'.
   //    El operador '...' (rest operator) capturará el resto de las props

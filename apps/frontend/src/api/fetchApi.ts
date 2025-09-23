@@ -31,6 +31,6 @@ export const fetchApi = async <T>({
     console.log(responseJson);
     return responseJson;
   } catch (error: any) {
-    
+    console.error(error.message);
   }
 };
